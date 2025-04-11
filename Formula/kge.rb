@@ -21,7 +21,7 @@ class Kge < Formula
 
   resource "python-dateutil" do
     url "https://pypi.org/packages/source/p/python-dateutil/python-dateutil-2.8.2.tar.gz"
-    sha256 "0123cacc1627ae1b7437b1357e5a3b58daf9988a89badf1f15ab08d984501125"
+    sha256 "0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86"
   end
 
   def install
