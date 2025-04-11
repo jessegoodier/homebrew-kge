@@ -3,7 +3,7 @@ class KgeKubectlGetEvents < Formula
 
   desc "A kubernetes utility for viewing pod events in a user-friendly way"
   homepage "https://github.com/jessegoodier/kge"
-  url "https://pypi.org/packages/source/k/kge-kubectl-get-events/kge-kubectl-get-events-0.4.0.tar.gz"
+  url "https://github.com/jessegoodier/kge/raw/refs/heads/main/archive/refs/tags/kge-0.4.0.tar.gz"
   sha256 "3b9a5179c64edb5456d8d6d2252675df07f042710324bd24846f829dc43e9c94"
   license "MIT"
 
