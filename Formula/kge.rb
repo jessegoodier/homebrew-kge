@@ -14,6 +14,11 @@ class Kge < Formula
     sha256 "72f095a1cd593401ff26b3b8d71749340394ca6d8413770ea28ce18efd5bcf4c"
   end
 
+  resource "six" do
+    url "https://pypi.org/packages/source/s/six/six-1.16.0.tar.gz"
+    sha256 "1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926"
+  end
+
   def install
     virtualenv_install_with_resources
   end
