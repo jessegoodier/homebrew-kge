@@ -11,7 +11,7 @@ class KgeKubectlGetEvents < Formula
 
   resource "kubernetes" do
     url "https://pypi.org/packages/source/k/kubernetes/kubernetes-12.0.0.tar.gz"
-    sha256 "52f1ef257b24f8b3c3c3a3cbf656b4e9f3ebdc187656f1a5e3c461acf8aa774f"
+    sha256 "72f095a1cd593401ff26b3b8d71749340394ca6d8413770ea28ce18efd5bcf4c"
   end
 
   def install
