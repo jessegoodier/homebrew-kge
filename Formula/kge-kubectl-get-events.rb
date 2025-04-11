@@ -1,7 +1,7 @@
 class KgeKubectlGetEvents < Formula
   include Language::Python::Virtualenv
 
-  desc "A kubernetes utility for viewing pod events in a user-friendly way"
+  desc "Kubernetes utility for viewing pod events in a user-friendly way"
   homepage "https://github.com/jessegoodier/kge"
   url "https://github.com/jessegoodier/kge/raw/refs/heads/main/archive/refs/tags/kge-0.4.0.tar.gz"
   sha256 "9895e3e88f681cf04454b112bb4cd5c702b4833abb69f2feec4a3bb01900d383"
@@ -21,4 +21,4 @@ class KgeKubectlGetEvents < Formula
   test do
     system "#{bin}/kge", "--help"
   end
-end 
+end
