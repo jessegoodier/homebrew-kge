@@ -7,7 +7,7 @@ class Kge < Formula
   sha256 "0dc2f9c16b5aed58f2a5bdaed7edef337d17e051b8d25c34f0a61bbc3adfc495"
   license "MIT"
 
-  depends_on "python@3.9" => :recommended
+  depends_on "python@3.11" => :recommended
 
   resource "kubernetes" do
     url "https://pypi.org/packages/source/k/kubernetes/kubernetes-12.0.0.tar.gz"
