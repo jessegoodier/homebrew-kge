@@ -1,4 +1,4 @@
-class Kge < Formula
+class kge < Formula
   include Language::Python::Virtualenv
 
   desc "Kubernetes utility for viewing pod events in a user-friendly way"
