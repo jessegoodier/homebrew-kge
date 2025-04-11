@@ -19,6 +19,11 @@ class Kge < Formula
     sha256 "1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926"
   end
 
+  resource "dateutil" do
+    url "https://pypi.org/packages/source/d/dateutil/dateutil-2.8.2.tar.gz"
+    sha256 "0123cacc1627ae1b7437b1357e5a3b58daf9988a89badf1f15ab08d984501125"
+  end
+
   def install
     virtualenv_install_with_resources
   end
