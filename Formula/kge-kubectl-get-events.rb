@@ -1,4 +1,4 @@
-class KgeKubectlGetEvents < Formula
+class Kge < Formula
   include Language::Python::Virtualenv
 
   desc "Kubernetes utility for viewing pod events in a user-friendly way"
@@ -7,7 +7,7 @@ class KgeKubectlGetEvents < Formula
   sha256 "9895e3e88f681cf04454b112bb4cd5c702b4833abb69f2feec4a3bb01900d383"
   license "MIT"
 
-  depends_on "python@3.9"
+  depends_on "python@3.9" => :recommended
 
   resource "kubernetes" do
     url "https://pypi.org/packages/source/k/kubernetes/kubernetes-12.0.0.tar.gz"
