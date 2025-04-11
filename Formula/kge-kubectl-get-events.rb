@@ -10,7 +10,7 @@ class KgeKubectlGetEvents < Formula
   depends_on "python@3.9"
 
   resource "kubernetes" do
-    url "https://files.pythonhosted.org/packages/34/19/2f351c0eaf05234dc33a7ba7c3e81b531bc4d3b6b5b1c5a4/kubernetes-12.0.0.tar.gz"
+    url "https://pypi.org/packages/source/k/kubernetes/kubernetes-12.0.0.tar.gz"
     sha256 "52f1ef257b24f8b3c3c3a3cbf656b4e9f3ebdc187656f1a5e3c461acf8aa774f"
   end
 
