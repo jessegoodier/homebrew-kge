@@ -1,4 +1,4 @@
-class Kge_kubectl_get_events < Formula
+class Kge < Formula
   include Language::Python::Virtualenv
 
   desc "Kubernetes utility for viewing pod and failed replicaset events"
