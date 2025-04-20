@@ -137,7 +137,7 @@ def update_formula():
     """Update the formula to the latest version."""
     package_name = "kge-kubectl-get-events"
     formula_name = "kge"
-    formula_file = Path("homebrew-kge/Formula") / f"{formula_name}.rb"
+    formula_file = Path("./Formula") / f"{formula_name}.rb"
     
     if not formula_file.exists():
         print(f"Error: Formula file {formula_file} not found")
