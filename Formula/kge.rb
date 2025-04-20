@@ -7,7 +7,7 @@ class Kge < Formula
   sha256 "3dfcd94ad987b0de62942ff4f60664d16fd7e4c8806786ed15b2f7c90b3e7478"
   license "MIT"
 
-  depends_on "python@3.11" => :recommended
+  depends_on "python@3.12" => :recommended
 
   resource "certifi" do
     url "https://files.pythonhosted.org/packages/1c/ab/c9f1e32b7b1bf505bf26f0ef697775960db7932abeb7b516de930ba2705f/certifi-2025.1.31.tar.gz"
