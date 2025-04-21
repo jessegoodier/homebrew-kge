@@ -1,1 +1,10 @@
 venv/
+temp/
+.DS_Store
+.idea/
+.vscode/
+.venv/
+.pytest_cache/
+.kubeconfig
+gke_gcloud_auth_plugin_cache
+pipfile*
