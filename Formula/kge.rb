@@ -8,7 +8,6 @@ class Kge < Formula
   license "MIT"
 
   depends_on "python@3.13" => [:build, :test]
-  depends_on "poetry-core" => :build
 
   def install
     # Create virtual environment
