@@ -1,9 +1,10 @@
 name: brew pr-pull
 
 on:
-  pull_request_target:
-    types:
-      - labeled
+  workflow_dispatch:
+  # pull_request_target:
+  #   types:
+  #     - labeled
 
 jobs:
   pr-pull:

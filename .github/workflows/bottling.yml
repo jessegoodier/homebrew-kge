@@ -27,8 +27,8 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y build-essential curl file git
-          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-          echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> $GITHUB_ENV
+          /bin/bash -c "$(curl -fsSL 'https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh')"
+          echo "eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" >> "$GITHUB_ENV"
           eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
       - name: Install Homebrew (Mac only)
@@ -47,7 +47,7 @@ jobs:
       - name: Build bottle
         run: |
           brew bottle jessegoodier/kge/kge
-          for file in *.bottle.tar.gz; do
+          for file in "*.bottle.tar.gz"; do
             if [ ! -f "$file" ]; then
               echo "No bottle file was created"
               exit 1
@@ -59,8 +59,8 @@ jobs:
         with:
           name: "bottle-${{ matrix.os }}"
           path: |
-            *.bottle.tar.gz
-            *.bottle.json
+            "*.bottle.tar.gz"
+            "*.bottle.json"
           if-no-files-found: error
 
   release:
@@ -87,9 +87,9 @@ jobs:
 
       - name: Upload bottles to release
         run: |
-          find ./bottles -name "*.tar.gz" -exec gh release upload "${{ github.ref_name }}" {} --clobber \;
+          find ./bottles -name "*.tar.gz" -exec gh release upload "${{ github.ref_name }}" "{}" --clobber \;
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN_FOR_ACTIONS }}
+          GITHUB_TOKEN: "${{ secrets.GH_TOKEN_FOR_ACTIONS }}"
 
   update-formula:
     name: Update formula bottle block (Manual step suggestion)
