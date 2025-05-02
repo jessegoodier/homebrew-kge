@@ -1,0 +1,95 @@
+name: Build and Bottle
+
+on:
+  push:
+    tags:
+      - 'v*'   # Only build on new version tags (v1.2.3, etc)
+  workflow_dispatch:
+
+jobs:
+  build-bottle:
+    name: Build and Bottle (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Homebrew (Linux only)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential curl file git
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> $GITHUB_ENV
+          eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+      - name: Install Homebrew (Mac only)
+        if: runner.os == 'macOS'
+        run: |
+          brew update
+
+      - name: Tap your formula
+        run: |
+          brew tap jessegoodier/kge
+
+      - name: Install formula from source
+        run: |
+          brew install --build-from-source jessegoodier/kge/kge
+
+      - name: Build bottle
+        run: |
+          brew bottle jessegoodier/kge/kge
+          
+      - name: Upload bottle artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: bottle-${{ matrix.os }}
+          path: |
+            *.bottle.tar.gz
+            *.bottle.json
+
+  release:
+    name: Upload to GitHub Release
+    needs: build-bottle
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download bottle artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: ./bottles
+
+      - name: Display bottles
+        run: ls -R ./bottles
+
+      - name: Create GitHub Release (if not exists)
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN_FOR_ACTIONS }}
+
+
+      - name: Upload bottles to release
+        run: |
+          find ./bottles -name "*.tar.gz" -exec gh release upload "${{ github.ref_name }}" {} --clobber \;
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN_FOR_ACTIONS }}
+
+  update-formula:
+    name: Update formula bottle block (Manual step suggestion)
+    runs-on: ubuntu-latest
+    if: ${{ always() }}
+    steps:
+      - name: Show instruction
+        run: |
+          echo "✅ Bottles uploaded. Now manually run 'brew bottle --merge' to update your Formula."
+          echo "Example:"
+          echo ""
+          echo "brew tap jessegoodier/kge"
+          echo "gh release download vX.Y.Z -p '*.json'"
+          echo "brew bottle --merge --write --no-commit *.json"

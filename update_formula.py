@@ -44,7 +44,20 @@ def get_package_metadata(package_name):
 def get_explicit_dependencies():
     """Get explicit dependencies from pyproject.toml."""
     try:
-        with open("pyproject.toml", "rb") as f:
+        if Path("pyproject.toml").exists():
+            PYPROJECT_FILE = "pyproject.toml"
+        elif Path("../kge/pyproject.toml").exists():
+            PYPROJECT_FILE = "../kge/pyproject.toml"
+        else:
+            # download pyproject.toml from https://github.com/jessegoodier/kge/blob/main/pyproject.toml
+            print("Downloading pyproject.toml from GitHub")
+            response = requests.get("https://raw.githubusercontent.com/jessegoodier/kge/main/pyproject.toml")
+            response.raise_for_status()
+            PYPROJECT_FILE = "pyproject.toml"
+            with open(PYPROJECT_FILE, "wb") as f:
+                f.write(response.content)
+
+        with open(PYPROJECT_FILE, "rb") as f:
             pyproject = tomli.load(f)
             return [dep.split(">=")[0].split("<")[0].strip() for dep in pyproject["project"]["dependencies"]]
     except Exception as e:
@@ -54,6 +67,18 @@ def get_explicit_dependencies():
 def get_sub_dependencies(package_name):
     """Get all sub-dependencies for a package using pipdeptree."""
     try:
+        # run pip list and make sure kge-kubectl-get-events is installed
+        result = subprocess.run(
+            ["pip", "list"],
+            capture_output=True,
+            text=True,
+            check=True
+        )
+        if "kge-kubectl-get-events" not in result.stdout:
+            print("kge-kubectl-get-events is not installed, please install it first")
+            print("pip install kge-kubectl-get-events")
+            sys.exit(1)
+
         # Get the complete dependency tree in JSON format
         result = subprocess.run(
             ["pipdeptree", "-p", package_name, "--json"],

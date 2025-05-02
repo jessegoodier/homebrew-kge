@@ -3,8 +3,8 @@ class Kge < Formula
 
   desc "Kubernetes utility for viewing pod and failed replicaset events"
   homepage "https://github.com/jessegoodier/kge"
-  url "https://files.pythonhosted.org/packages/36/c5/16fb1230e239bc2a7c2079935fe5af5e4519af305ef8e534303422eeeaf1/kge_kubectl_get_events-0.9.0.tar.gz"
-  sha256 "c3de4bcd44f3843c39df9b91e5f68fff622daa950a87b51e3562e8c4028cb091"
+  url "https://files.pythonhosted.org/packages/3d/6c/81dff63577dc516e3f220fc496f8d294f5ec189868e825de6860f9ebe8e5/kge_kubectl_get_events-0.9.10.tar.gz"
+  sha256 "fdabd8149707a1d63c273b0c8b610331d785c8546a08e9ec481e85a0c961ab69"
   license "MIT"
 
   depends_on "python@3.13"
@@ -30,8 +30,8 @@ class Kge < Formula
   end
 
   resource "charset-normalizer" do
-    url "https://files.pythonhosted.org/packages/16/b0/572805e227f01586461c80e0fd25d65a2115599cc9dad142fee4b747c357/charset_normalizer-3.4.1.tar.gz"
-    sha256 "44251f18cd68a75b56585dd00dae26183e102cd5e0f9f1466e6df5da2ed64ea3"
+    url "https://files.pythonhosted.org/packages/e4/33/89c2ced2b67d1c2a61c19c6751aa8902d46ce3dacb23600a283619f5a12d/charset_normalizer-3.4.2.tar.gz"
+    sha256 "5baececa9ecba31eff645232d59845c07aa030f0c81ee70184a90d35099a0e63"
   end
 
   resource "durationpy" do
@@ -69,7 +69,12 @@ class Kge < Formula
     sha256 "9859c40929662bec5d64f34d01c99e093149682a3f38915dc0655d5a633dd918"
   end
 
-  resource "pyasn1-modules" do
+  resource "pyasn1" do
+    url "https://files.pythonhosted.org/packages/ba/e9/01f1a64245b89f039897cb0130016d79f77d52669aae6ee7b159a6c4c018/pyasn1-0.6.1.tar.gz"
+    sha256 "6f580d2bdd84365380830acf45550f2511469f673cb4a5ae3857a3170128b034"
+  end
+
+  resource "pyasn1_modules" do
     url "https://files.pythonhosted.org/packages/e9/e6/78ebbb10a8c8e4b61a59249394a4a594c1a7af95593dc933a349c8d00964/pyasn1_modules-0.4.2.tar.gz"
     sha256 "677091de870a80aae844b1ca6134f54652fa2c8c5a52aa396440ac3106e941e6"
   end
