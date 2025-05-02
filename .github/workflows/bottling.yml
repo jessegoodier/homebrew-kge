@@ -47,15 +47,17 @@ jobs:
       - name: Build bottle
         run: |
           brew bottle jessegoodier/kge/kge
-          if [ ! -f *.bottle.tar.gz ]; then
-            echo "No bottle file was created"
-            exit 1
-          fi
+          for file in *.bottle.tar.gz; do
+            if [ ! -f "$file" ]; then
+              echo "No bottle file was created"
+              exit 1
+            fi
+          done
           
       - name: Upload bottle artifact
         uses: actions/upload-artifact@v4
         with:
-          name: bottle-${{ matrix.os }}
+          name: "bottle-${{ matrix.os }}"
           path: |
             *.bottle.tar.gz
             *.bottle.json
