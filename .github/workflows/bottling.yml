@@ -6,6 +6,10 @@ on:
       - 'v*'   # Only build on new version tags (v1.2.3, etc)
   workflow_dispatch:
 
+# Set permissions for the workflow
+permissions:
+  contents: write  # Required for creating releases and uploading artifacts
+
 jobs:
   build-bottle:
     name: Build and Bottle (${{ matrix.os }})
@@ -43,6 +47,10 @@ jobs:
       - name: Build bottle
         run: |
           brew bottle jessegoodier/kge/kge
+          if [ ! -f *.bottle.tar.gz ]; then
+            echo "No bottle file was created"
+            exit 1
+          fi
           
       - name: Upload bottle artifact
         uses: actions/upload-artifact@v4
@@ -51,6 +59,7 @@ jobs:
           path: |
             *.bottle.tar.gz
             *.bottle.json
+          if-no-files-found: error
 
   release:
     name: Upload to GitHub Release
