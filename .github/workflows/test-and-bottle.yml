@@ -1,0 +1,42 @@
+name: test-bot-with-bottles
+
+on:
+  pull_request:
+    paths:
+      - "Formula/**"
+  push:
+    branches:
+      - main
+    paths:
+      - "Formula/**"
+
+jobs:
+  test-bot:
+    runs-on: macos-latest
+    env:
+      HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      HOMEBREW_NO_INSTALL_FROM_API: 1
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # test-bot needs history
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - name: Run test-bot with bottle building
+        run: |
+          brew update-reset
+          brew tap --repair
+          brew test-bot --only-formulae --tap=${{ github.repository }} --build-bottle
+
+      - name: Commit bottle changes
+        if: success()
+        run: |
+          git add Formula/*.rb
+          git commit -m "Update bottles for formula after CI build [skip ci]"
+          git push
