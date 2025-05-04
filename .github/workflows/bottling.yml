@@ -36,19 +36,19 @@ jobs:
         run: |
           brew tap jessegoodier/kge
 
-      - name: Install formula from source
-        run: |
-          brew install --build-from-source jessegoodier/kge/kge
-
       - name: Build bottle
         run: |
-          brew bottle jessegoodier/kge/kge
-          for file in "*.bottle.tar.gz"; do
-            if [ ! -f "$file" ]; then
-              echo "No bottle file was created"
-              exit 1
-            fi
-          done
+          brew install --build-bottle jessegoodier/kge/kge
+
+      # - name: Build bottle
+      #   run: |
+      #     brew bottle jessegoodier/kge/kge
+      #     for file in "*.bottle.tar.gz"; do
+      #       if [ ! -f "$file" ]; then
+      #         echo "No bottle file was created"
+      #         exit 1
+      #       fi
+      #     done
           
       - name: Upload bottle artifact
         uses: actions/upload-artifact@v4
