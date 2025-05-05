@@ -32,7 +32,7 @@ jobs:
         run: |
           brew update-reset
           brew tap --repair
-          brew test-bot --only-formulae --tap=${{ github.repository }} --build-bottle
+          brew test-bot --only-formulae --tap=${{ github.repository }}
 
       - name: Commit bottle changes
         if: success()
