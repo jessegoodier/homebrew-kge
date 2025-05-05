@@ -8,3 +8,10 @@ temp/
 .kubeconfig
 gke_gcloud_auth_plugin_cache
 pipfile*
+bottle_output.txt
+home/
+linkage_output.txt
+skipped_or_failed_formulae-arm64_sonoma.txt
+steps_output.txt
+temp/
+venv/
